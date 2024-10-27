@@ -2,40 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Vue Forms</title>
+    <title> Shopping Cart</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+    <style>
+        th, td {
+            width: 25%;
+            text-align: center;
+        }
+    </style>
+    
 </head>
 <body>
 
 <div id="app">
-    <label>Please enter your name:</label>
-    <input v-model="name">
+ 
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>total</th>
+        </tr>
+        
+        <!--data entries for table-->
+       <tr>
+           <td>{{name}}</td>
+           <td>{{unitPrice}}</td>
+           <td><input type="number" v-model="quantity"></td>
+           <td>{{total}}</td>
+       </tr>
+    </table>
     
-    <p v-if="name">Thanks, your name is {{name}}</p>
-    <p v-else>Awaiting user input</p>
-    
-    <button v-on:click="clearName">Clear Name</button>
     
 </div>
 
 <script>
     
-    const {createApp, ref } = Vue
+    const {createApp, ref, computed } = Vue
     
     createApp({
         setup() {
+            const name = ref('Ball')
+            const quantity = ref(1)
+            const unitPrice = ref(4.99)
             
-            const name = ref('') //empty string
+            const total = computed(function () {
+                const totalPrice = quantity.value * unitPrice.value
+                const formattedPrice = totalPrice.toFixed(2)
+                return formattedPrice
             
-            function clearName() {
-                name.value = ''
-                
-            }
+            })
             
+            //return the data for table
             return {
-                name,
-                clearName,
-                
+                name, 
+                quantity,
+                unitPrice,
+                total
                 
             }
         }
