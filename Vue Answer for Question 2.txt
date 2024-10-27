@@ -1,0 +1,1 @@
+The Vue warning message means that while “total” has been entered, it has not been defined. Meaning, “total” was added somewhere in the code, but it either doesn’t have a “return” function or it doesn’t have a definition of what to do within the code. It should not be ignored and can be fixed by giving “total” a function.
